@@ -40,3 +40,4 @@ function loadResources ()
 end
 
 print("testing")
+print("another test")
