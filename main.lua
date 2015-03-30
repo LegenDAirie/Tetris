@@ -38,3 +38,4 @@ function loadResources ()
 	-- Load images
 	imgSprites = love.graphics.newImage("assets/Pieces.png")
 end
+print("yeah")
