@@ -38,7 +38,3 @@ function loadResources ()
 	-- Load images
 	imgSprites = love.graphics.newImage("assets/Pieces.png")
 end
-
-print("testing")
-print("another test")
-print("and again")
