@@ -43,6 +43,11 @@ end
 
 function love.keypressed(key,unicode)
 	if key == 'up' then
-		-- rotate()
+		print("invoking rotate()")
+		rotate()
+	elseif key == "left" then
+		BlockSet.xCoor = BlockSet.xCoor - 1
+	elseif key == "right" then
+		BlockSet.xCoor = BlockSet.xCoor + 1
 	end
 end

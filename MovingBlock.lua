@@ -15,27 +15,20 @@ Block.__index = Block
 -- end
 
 function Block:update(dt)
-	-- falling speed needs to be 1/9th per sec
-	-- self.yPix = self.yPix + 20 * (dt * 2) -- dt is in seconds
-	-- self.yCoor = math.floor(self.yPix / 20)
-	self.yCoor = self.yCoor - self.offSetY
-	self.xCoor = self.xCoor - self.offSetx
-	self.yCoor = math.floor(BlockSet.yPix / 20) + self.offSetY
-	self.xCoor = math.floor(BlockSet.xPix / 20) + self.offSetx
-	-- print("self.yCoor is " .. self.yCoor)
+	self.yCoor = BlockSet.yCoor + self.offSetY
+	self.xCoor = BlockSet.xCoor + self.offSetx
 end
 
 function updateSet(dt)
 		--[[ this translates the x and y positions from pixels to my own
 	coordinates so i can make sure the they always stay in the proper
 	region --]]
+	-- falling speed needs to be 1/9th per sec
 	BlockSet.yPix = BlockSet.yPix + 20 * (dt * 2)
 	BlockSet.yCoor = math.floor(BlockSet.yPix / 20)
-	-- print("BlockSet.yCoor is " .. BlockSet.yCoor)
 end
 
 function Block:draw()
-	-- love.graphics.draw(imgBlock,self.x, self.y)
 	love.graphics.setColor(100, 23,213, 255)
 	love.graphics.rectangle("fill", self.xCoor * 20, self.yCoor * 20, 20, 20)
 end
@@ -47,7 +40,6 @@ end
 
 function spawnBlocks()
 	if rdyForNewMovBlock == true then
-		-- table.insert(movingBlocks, Block.create())
 		createBlockSet()
 		Block.create()
 		rdyForNewMovBlock = false
