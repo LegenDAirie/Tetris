@@ -15,8 +15,19 @@ Block.__index = Block
 -- end
 
 function Block:update(dt)
-	self.yCoor = BlockSet.yCoor + self.offSetY
-	self.xCoor = BlockSet.xCoor + self.offSetx
+	if state == 1 then
+		self.yCoor = BlockSet.yCoor + self.offSetY1
+		self.xCoor = BlockSet.xCoor + self.offSetx1
+	elseif state == 2 then
+		self.yCoor = BlockSet.yCoor + self.offSetY2
+		self.xCoor = BlockSet.xCoor + self.offSetx2
+	elseif state == 3 then
+		self.yCoor = BlockSet.yCoor + self.offSetY3
+		self.xCoor = BlockSet.xCoor + self.offSetx3
+	elseif state == 4 then
+		self.yCoor = BlockSet.yCoor + self.offSetY4
+		self.xCoor = BlockSet.xCoor + self.offSetx4
+	end
 end
 
 function updateSet(dt)
@@ -61,8 +72,16 @@ function Block.create()
 		setmetatable(self,Block)
 		self.xCoor = 0
 		self.yCoor = 0
-		self.offSetY = self.yCoor
-		self.offSetx = self.xCoor
+		-- self.position = 1
+		self.offSetY1 = self.yCoor
+		self.offSetx1 = self.xCoor
+		self.offSetY2 = self.yCoor
+		self.offSetx2 = 2
+		self.offSetY3 = 2
+		self.offSetx3 = 2
+		self.offSetY4 = 2
+		self.offSetx4 = 0
+
 		-- self.xPix = 20 * self.xCoor
 		-- self.yPix = 20 * self.yCoor
 		table.insert(movingBlocks, self)
@@ -71,8 +90,14 @@ function Block.create()
 		setmetatable(self,Block)
 		self.xCoor = 1
 		self.yCoor = 0
-		self.offSetY = self.yCoor
-		self.offSetx = self.xCoor
+		self.offSetY1 = self.yCoor
+		self.offSetx1 = self.xCoor
+		self.offSetY2 = 1
+		self.offSetx2 = 2
+		self.offSetY3 = 2
+		self.offSetx3 = 1
+		self.offSetY4 = 1
+		self.offSetx4 = 0
 		-- self.xPix = 20 * self.xCoor
 		-- self.yPix = 20 * self.yCoor
 		table.insert(movingBlocks, self)
@@ -81,8 +106,14 @@ function Block.create()
 		setmetatable(self,Block)
 		self.xCoor = 1
 		self.yCoor = 1
-		self.offSetY = self.yCoor
-		self.offSetx = self.xCoor
+		self.offSetY1 = self.yCoor
+		self.offSetx1 = self.xCoor
+		self.offSetY2 = 1
+		self.offSetx2 = 1
+		self.offSetY3 = 1
+		self.offSetx3 = 1
+		self.offSetY4 = 1
+		self.offSetx4 = 1
 		-- self.xPix = 20 * self.xCoor
 		-- self.yPix = 20 * self.yCoor
 		table.insert(movingBlocks, self)
@@ -91,8 +122,14 @@ function Block.create()
 		setmetatable(self,Block)
 		self.xCoor = 2
 		self.yCoor = 1
-		self.offSetY = self.yCoor
-		self.offSetx = self.xCoor
+		self.offSetY1 = self.yCoor
+		self.offSetx1 = self.xCoor
+		self.offSetY2 = 2
+		self.offSetx2 = 1
+		self.offSetY3 = 1
+		self.offSetx3 = 0
+		self.offSetY4 = 0
+		self.offSetx4 = 1
 		-- self.xPix = 20 * self.xCoor
 		-- self.yPix = 20 * self.yCoor
 		table.insert(movingBlocks, self)

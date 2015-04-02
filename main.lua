@@ -1,5 +1,6 @@
 require("movingBlock")
 require("rotate")
+state = 1
 function love.load()
 	math.randomseed(os.time())
 	restart()
