@@ -6,7 +6,6 @@ function Chillin.create(x,y)
 	setmetatable(self,Chillin)
 	self.xCoor = x
 	self.yCoor = y
-	print(self.xCoor)
 	table.insert(chillingBlocks, self)
 end
 

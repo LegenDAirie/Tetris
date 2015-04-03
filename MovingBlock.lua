@@ -18,6 +18,7 @@ function Block:update(dt)
 end
 
 function updateSet(dt)
+
 		--[[ this translates the x and y positions from pixels to my own
 	coordinates so i can make sure the they always stay in the proper
 	region --]]
@@ -25,11 +26,17 @@ function updateSet(dt)
 	checkForChange = BlockSet.yCoor
 	BlockSet.yPix = BlockSet.yPix + 20 * (dt * 2)
 	BlockSet.yCoor = math.floor(BlockSet.yPix / 20)
-	-- checking for collision after the block's yCoor changes
-	-- instead of after every frame 
-	if checkForChange ~= BlockSet.yCoor then
-		-- check for collision
+
+
+	-- if collisionFalling() then
+	-- 	BlockSet.yCoor = BlockSet.yCoor - 1
+	-- 	hanzoDanzoDonzo()
+	-- end
+
+	for i,b in ipairs(movingBlocks) do
+		b:update(dt)
 	end
+
 end
 
 function Block:draw()

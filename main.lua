@@ -3,6 +3,7 @@ require("rotate")
 require("blockCreate")
 require("blockDeath")
 require("chillinBlocks")
+require("collision")
 
 state = 1
 
@@ -27,9 +28,6 @@ function updateGame(dt)
 	spawnBlocks()
 	-- updates the block set
 	updateSet(dt)
-	for i,b in ipairs(movingBlocks) do
-		b:update(dt)
-	end
 end
 
 function love.draw()
@@ -53,7 +51,6 @@ end
 
 function love.keypressed(key,unicode, dt)
 	if key == 'up' then
-		print("invoking rotate()")
 		rotate()
 	elseif key == "left" then
 		BlockSet.xCoor = BlockSet.xCoor - 1
@@ -64,5 +61,7 @@ function love.keypressed(key,unicode, dt)
 		BlockSet.yPix = BlockSet.yPix + 20
 	elseif key == " " then
 		hanzoDanzoDonzo()
+	elseif key == "c" then
+		collision()
 	end
 end
