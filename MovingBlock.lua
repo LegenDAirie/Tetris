@@ -1,19 +1,6 @@
 Block = {}
 Block.__index = Block
 
-
-
--- function Block.create()
--- 	local self = {}
--- 	setmetatable(self,Block)
--- 	self.xPix = 0
--- 	self.yPix = 0
--- 	self.xCoor = 0
--- 	self.yCoor = 0
--- 	self.moving = true
--- 	return self
--- end
-
 function Block:update(dt)
 	if state == 1 then
 		self.yCoor = BlockSet.yCoor + self.offSetY1
@@ -35,8 +22,14 @@ function updateSet(dt)
 	coordinates so i can make sure the they always stay in the proper
 	region --]]
 	-- falling speed needs to be 1/9th per sec
+	checkForChange = BlockSet.yCoor
 	BlockSet.yPix = BlockSet.yPix + 20 * (dt * 2)
 	BlockSet.yCoor = math.floor(BlockSet.yPix / 20)
+	-- checking for collision after the block's yCoor changes
+	-- instead of after every frame 
+	if checkForChange ~= BlockSet.yCoor then
+		-- check for collision
+	end
 end
 
 function Block:draw()
@@ -51,6 +44,7 @@ end
 
 function spawnBlocks()
 	if rdyForNewMovBlock == true then
+		state = 1
 		createBlockSet()
 		Block.create()
 		rdyForNewMovBlock = false
@@ -60,78 +54,8 @@ end
 function createBlockSet()
 	BlockSet = {}
 	BlockSet.xCoor = 0
-	BlockSet.yCoor = 0
+	BlockSet.yCoor = -1
 	BlockSet.xPix = 20 * BlockSet.xCoor
 	BlockSet.yPix = 20 * BlockSet.yCoor
 	return BlockSet
-end
-
-function Block.create()
-	if thisBlock == 1 then
-		local self = {}
-		setmetatable(self,Block)
-		self.xCoor = 0
-		self.yCoor = 0
-		-- self.position = 1
-		self.offSetY1 = self.yCoor
-		self.offSetx1 = self.xCoor
-		self.offSetY2 = self.yCoor
-		self.offSetx2 = 2
-		self.offSetY3 = 2
-		self.offSetx3 = 2
-		self.offSetY4 = 2
-		self.offSetx4 = 0
-
-		-- self.xPix = 20 * self.xCoor
-		-- self.yPix = 20 * self.yCoor
-		table.insert(movingBlocks, self)
-
-		local self = {}
-		setmetatable(self,Block)
-		self.xCoor = 1
-		self.yCoor = 0
-		self.offSetY1 = self.yCoor
-		self.offSetx1 = self.xCoor
-		self.offSetY2 = 1
-		self.offSetx2 = 2
-		self.offSetY3 = 2
-		self.offSetx3 = 1
-		self.offSetY4 = 1
-		self.offSetx4 = 0
-		-- self.xPix = 20 * self.xCoor
-		-- self.yPix = 20 * self.yCoor
-		table.insert(movingBlocks, self)
-
-		local self = {}
-		setmetatable(self,Block)
-		self.xCoor = 1
-		self.yCoor = 1
-		self.offSetY1 = self.yCoor
-		self.offSetx1 = self.xCoor
-		self.offSetY2 = 1
-		self.offSetx2 = 1
-		self.offSetY3 = 1
-		self.offSetx3 = 1
-		self.offSetY4 = 1
-		self.offSetx4 = 1
-		-- self.xPix = 20 * self.xCoor
-		-- self.yPix = 20 * self.yCoor
-		table.insert(movingBlocks, self)
-
-		local self = {}
-		setmetatable(self,Block)
-		self.xCoor = 2
-		self.yCoor = 1
-		self.offSetY1 = self.yCoor
-		self.offSetx1 = self.xCoor
-		self.offSetY2 = 2
-		self.offSetx2 = 1
-		self.offSetY3 = 1
-		self.offSetx3 = 0
-		self.offSetY4 = 0
-		self.offSetx4 = 1
-		-- self.xPix = 20 * self.xCoor
-		-- self.yPix = 20 * self.yCoor
-		table.insert(movingBlocks, self)
-	end
 end
