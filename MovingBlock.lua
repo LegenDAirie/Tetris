@@ -1,8 +1,11 @@
 Block = {}
 Block.__index = Block
 
+NextB = {}
+NextB.__index = NextB
+
 function Block:update(dt)
-	if state == 1 then
+if state == 1 then
 		self.yCoor = BlockSet.yCoor + self.offSetY1
 		self.xCoor = BlockSet.xCoor + self.offSetx1
 	elseif state == 2 then
@@ -14,7 +17,7 @@ function Block:update(dt)
 	elseif state == 4 then
 		self.yCoor = BlockSet.yCoor + self.offSetY4
 		self.xCoor = BlockSet.xCoor + self.offSetx4
-	end
+	end	
 end
 
 function updateSet(dt)
@@ -23,7 +26,7 @@ function updateSet(dt)
 	coordinates so i can make sure the they always stay in the proper
 	region --]]
 	-- falling speed needs to be 1/9th per sec
-	checkForChange = BlockSet.yCoor
+	-- checkForChange = BlockSet.yCoor
 	BlockSet.yPix = BlockSet.yPix + 20 * (dt * 2)
 	BlockSet.yCoor = math.floor(BlockSet.yPix / 20)
 
@@ -32,16 +35,26 @@ function updateSet(dt)
 	-- 	BlockSet.yCoor = BlockSet.yCoor - 1
 	-- 	hanzoDanzoDonzo()
 	-- end
-
 	for i,b in ipairs(movingBlocks) do
 		b:update(dt)
 	end
-
+	if collisionFalling() then
+		BlockSet.yCoor = BlockSet.yCoor - 1
+		for i,b in ipairs(movingBlocks) do
+			b:update(dt)
+		end
+		hanzoDanzoDonzo()
+	end
 end
 
 function Block:draw()
 	love.graphics.setColor(100, 23,213, 255)
 	love.graphics.rectangle("fill", self.xCoor * 20, self.yCoor * 20, 20, 20)
+end
+
+function NextB:draw()
+	love.graphics.setColor(34,134,200,255)
+	love.graphics.rectangle('fill', (20 + self.offSetx1) * 20, (10 + self.offSetY1) * 20, 20, 20)
 end
 
 function drawSet()
@@ -54,6 +67,10 @@ function spawnBlocks()
 		state = 1
 		createBlockSet()
 		Block.create()
+		if collisionFalling() then
+			GameOver()
+			pause = true
+		end
 		rdyForNewMovBlock = false
 	end
 end
