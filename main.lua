@@ -20,7 +20,7 @@ function restart()
 	isLineFull = {}
 	nextBlocks = {}
 
-	nextBlock = math.random(1,2)
+	nextBlock = math.random(1,7)
 	rdyForNewMovBlock = true
 
 	Line1 = {}
