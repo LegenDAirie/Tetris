@@ -16,6 +16,12 @@ function Chillin:draw()
 	love.graphics.rectangle("fill", self.xCoor * 20, self.yCoor * 20, 20, 20)
 end
 
-function Chillin:dropDown(k)
+function Chillin:dropDown()
 	self.yCoor = self.yCoor + 1
+end
+
+function Chillin:death()
+	x = self.xCoor
+	y = self.yCoor
+	Chillin.create(x,y)
 end
